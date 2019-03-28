@@ -15,10 +15,25 @@
 package funcs
 
 import (
+	"fmt"
 	"github.com/open-falcon/falcon-plus/common/model"
 	"github.com/toolkits/nux"
+	"github.com/toolkits/sys"
 	"log"
 )
+
+// add by wjl 2019-03-27:aiops Kernel Version
+var kernelVersion string
+
+func InitKernelVersion() {
+	data, err := sys.CmdOutNoLn("uname", "-r")
+	if err != nil {
+		log.Println(err)
+		kernelVersion = "uname -r error"
+		return
+	}
+	kernelVersion = data
+}
 
 func KernelMetrics() (L []*model.MetricValue) {
 
@@ -53,5 +68,18 @@ func KernelMetrics() (L []*model.MetricValue) {
 	L = append(L, GaugeValueAIOPS("system.openfile.use", allocateFiles, component, metricGroup, unit))
 	// L = append(L, GaugeValue("kernel.files.allocated", allocateFiles))
 	// L = append(L, GaugeValue("kernel.files.left", maxFiles-allocateFiles))
+
+	if kernelVersion != "" {
+		L = append(L, GaugeValueAIOPSString("system.kernel", kernelVersion, component, metricGroup, unit))
+	}
+
+	// add by wjl 2019-03-27:aiops Kernel Version
+	days, hours, mins, err := nux.SystemUptime()
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	L = append(L, GaugeValueAIOPSString("system.lastboot", fmt.Sprintf("%d days %d hours %d minutes", days, hours, mins), component, metricGroup, unit))
+
 	return
 }

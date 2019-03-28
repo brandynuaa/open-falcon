@@ -90,7 +90,7 @@ func collect(sec int64, fns []func() []*model.MetricValue) {
 			mvs[j].System = system // add by wjl 2019-03-20: aipos
 			mvs[j].Endpoint = hostname
 			mvs[j].Timestamp = now
-			mvs[j].Datatype = "Float" // add by wjl 2019-03-20: aipos
+			// mvs[j].Datatype = "Float" // add by wjl 2019-03-20: aipos
 		}
 
 		// g.SendToTransfer(mvs)

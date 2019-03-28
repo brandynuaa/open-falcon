@@ -58,6 +58,9 @@ func main() {
 
 	go cron.InitDataHistory()
 
+	// add by wjl 2019-03-27: aiops
+	go funcs.InitKernelVersion()
+
 	cron.ReportAgentStatus()
 	cron.SyncMinePlugins()
 	cron.SyncBuiltinMetrics()

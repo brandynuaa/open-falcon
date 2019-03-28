@@ -17,6 +17,7 @@ package funcs
 import (
 	"github.com/open-falcon/falcon-plus/common/model"
 	"github.com/toolkits/nux"
+	"runtime"
 	"sync"
 )
 
@@ -184,7 +185,7 @@ func CpuMetrics() []*model.MetricValue {
 	// modify by wjl:2019-03-20: aiops
 	component := "Cpu"
 	metricGroup := "CpuMonitor"
-	// unit := "_"
+	unit := "_"
 	unitPer := "%"
 	idle := GaugeValueAIOPS("cpu.idle", cpuIdleVal, component, metricGroup, unitPer)
 	// busy := GaugeValueAIOPS("cpu.busy", 100.0-cpuIdleVal, component, metricGroup, unitPer)
@@ -195,8 +196,9 @@ func CpuMetrics() []*model.MetricValue {
 	irq := GaugeValueAIOPS("cpu.hi", CpuIrq(), component, metricGroup, unitPer)
 	softirq := GaugeValueAIOPS("cpu.cpu.si", CpuSoftIrq(), component, metricGroup, unitPer)
 	steal := GaugeValueAIOPS("cpu.steal", CpuSteal(), component, metricGroup, unitPer)
+	count := GaugeValueAIOPS("cpu.count", runtime.NumCPU(), component, metricGroup, unit)
 	// guest := GaugeValueAIOPS("cpu.guest", CpuGuest(), component, metricGroup, unitPer)
 	// switches := CounterValueAIOPS("cpu.switches", CurrentCpuSwitches(), component, metricGroup, unit)
 	// return []*model.MetricValue{idle, busy, user, nice, system, iowait, irq, softirq, steal, guest, switches}
-	return []*model.MetricValue{idle, user, nice, system, iowait, irq, softirq, steal}
+	return []*model.MetricValue{idle, user, nice, system, iowait, irq, softirq, steal, count}
 }
