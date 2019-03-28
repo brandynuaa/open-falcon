@@ -200,5 +200,7 @@ func CpuMetrics() []*model.MetricValue {
 	// guest := GaugeValueAIOPS("cpu.guest", CpuGuest(), component, metricGroup, unitPer)
 	// switches := CounterValueAIOPS("cpu.switches", CurrentCpuSwitches(), component, metricGroup, unit)
 	// return []*model.MetricValue{idle, busy, user, nice, system, iowait, irq, softirq, steal, guest, switches}
-	return []*model.MetricValue{idle, user, nice, system, iowait, irq, softirq, steal, count}
+	totalcpus := MultiCpuMetrics()
+	// return []*model.MetricValue{idle, user, nice, system, iowait, irq, softirq, steal, count}
+	return append(totalcpus, idle, user, nice, system, iowait, irq, softirq, steal, count)
 }
