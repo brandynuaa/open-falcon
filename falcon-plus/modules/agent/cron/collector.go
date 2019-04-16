@@ -96,15 +96,6 @@ func collect(sec int64, fns []func() []*model.MetricValue) {
 		// g.SendToTransfer(mvs)
 
 		for _, b := range mvs {
-			// postform := fmt.Sprintf("[{\"endpoint\":\"%s\", \"metric\":\"%s\", \"counterType\":\"%s\", \"tags\":\"%s\", \"step\":%d, \"timestamp\":%d, \"value\":%v}]",
-			// 	b.Endpoint,
-			// 	b.Metric,
-			// 	b.Type,
-			// 	b.Tags,
-			// 	b.Step,
-			// 	b.Timestamp,
-			// 	b.Value)
-			// fmt.Println(postform)
 			postform := toJson(b)
 			fmt.Println(postform)
 			g.SyncProducer(postform, g.Config().KafkaCfg)

@@ -124,18 +124,6 @@ func MultiCpuMetrics() []*model.MetricValue {
 	for i := 0; i < len(procStatHistory[0].Cpus); i++ {
 		currentCpu := procStatHistory[0].Cpus[i]
 		oldCpu := procStatHistory[1].Cpus[i]
-		// cpuIdleVal := CpuIdleSinglecpu(currentCpu, oldCpu)
-		// idle := GaugeValue(fmt.Sprintf("cpu%d.idle", i), cpuIdleVal)
-		// busy := GaugeValue(fmt.Sprintf("cpu%d.busy", i), 100.0-cpuIdleVal)
-		// user := GaugeValue(fmt.Sprintf("cpu%d.user", i), CpuUserSinglecpu(currentCpu, oldCpu))
-		// nice := GaugeValue(fmt.Sprintf("cpu%d.nice", i), CpuNiceSinglecpu(currentCpu, oldCpu))
-		// system := GaugeValue(fmt.Sprintf("cpu%d.system", i), CpuSystemSinglecpu(currentCpu, oldCpu))
-		// iowait := GaugeValue(fmt.Sprintf("cpu%d.iowait", i), CpuIowaitSinglecpu(currentCpu, oldCpu))
-		// irq := GaugeValue(fmt.Sprintf("cpu%d.irq", i), CpuIrqSinglecpu(currentCpu, oldCpu))
-		// softirq := GaugeValue(fmt.Sprintf("cpu%d.softirq", i), CpuSoftIrqSinglecpu(currentCpu, oldCpu))
-		// steal := GaugeValue(fmt.Sprintf("cpu%d.steal", i), CpuStealSinglecpu(currentCpu, oldCpu))
-		// guest := GaugeValue(fmt.Sprintf("cpu%d.guest", i), CpuGuestSinglecpu(currentCpu, oldCpu))
-		// switches := CounterValue(fmt.Sprintf("cpu%d.switches", i), CurrentCpuSwitches())
 
 		// modify by wjl:2019-03-28: aiops
 		tags := fmt.Sprintf("cpu=cpu-%d", i+1)

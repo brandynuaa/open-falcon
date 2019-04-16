@@ -80,7 +80,10 @@ type GlobalConfig struct {
 	Collector     *CollectorConfig  `json:"collector"`
 	DefaultTags   map[string]string `json:"default_tags"`
 	IgnoreMetrics map[string]bool   `json:"ignore"`
-	KafkaCfg      *KafkaConfig      `json:"kafkacfg"`
+	KafkaCfg	*KafkaConfig	`json:"kafkacfg"`
+	PortCollect  string 	`json:"portcollect"`
+	ServiceIp    string     `json:"serviceip"`
+	NetCards     []string   `json:"net_cards"`
 }
 
 var (

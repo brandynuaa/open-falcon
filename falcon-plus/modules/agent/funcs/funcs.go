@@ -51,30 +51,16 @@ func BuildMappers() {
 			},
 			Interval: interval,
 		},
-		// {
-		// 	Fs: []func() []*model.MetricValue{
-		// 		PortMetrics,
-		// 		SocketStatSummaryMetrics,
-		// 	},
-		// 	Interval: interval,
-		// },
-		// {
-		// 	Fs: []func() []*model.MetricValue{
-		// 		DuMetrics,
-		// 	},
-		// 	Interval: interval,
-		// },
-		// {
-		// 	Fs: []func() []*model.MetricValue{
-		// 		UrlMetrics,
-		// 	},
-		// 	Interval: interval,
-		// },
-		// {
-		// 	Fs: []func() []*model.MetricValue{
-		// 		GpuMetrics,
-		// 	},
-		// 	Interval: interval,
-		// },
+		{
+			Fs: []func() []*model.MetricValue{
+				CpuMetricsAIOPS,
+				NetMetricsAIOPS,
+				KernelMetricsAIOPS,
+				PortInfoMetrics,
+				PingMetrics,
+				NetCardMetrics,
+			},
+			Interval: interval,
+		},
 	}
 }
